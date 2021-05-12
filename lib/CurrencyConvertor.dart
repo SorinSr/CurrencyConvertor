@@ -61,7 +61,7 @@ class MyHomePage extends StatelessWidget {
               });
         },
         tooltip: "Convert the money",
-        child: Icon(Icons.money_rounded),
+        child: Icon(Icons.swap_calls_rounded),
         backgroundColor: Colors.amberAccent,
       ),
     );
