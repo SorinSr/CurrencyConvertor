@@ -1,8 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_currency_converter/Currency.dart';
+import 'package:forex/forex.dart';
+
+import 'package:flutter_currency_converter/flutter_currency_converter.dart';
+
+
 
 void main() {
   runApp(MyApp());
+  getAmounts();
 }
 
 int _counter = 2;
@@ -12,9 +19,9 @@ final TextEditingController _myController2 = new TextEditingController();
 
 String _currency = " EUR ";
 
-double _eurCurrencyValue = 4.93;
-double _usdCurrencyValue = 4.09;
-double _currencyValue = _eurCurrencyValue; //default value
+double _eurCurrencyValue ;
+double _usdCurrencyValue ;
+double _currencyValue =_eurCurrencyValue ; //default value
 
 String _prettyText1 = "RON to EUR :   ";
 String _prettyText2 = "EUR to RON :   ";
@@ -173,22 +180,31 @@ class _CustomFormState extends State<CustomForm> {
       }
       _counter++;
       print(_counter);
+      getAmounts();
     });
   }
 }
 
+void getAmounts() async {
+  var usdCurrency = await FlutterCurrencyConverter.convert(
+      Currency(Currency.USD, amount: 1), Currency(Currency.RON));
+
+  var euroCurrency = await FlutterCurrencyConverter.convert(
+      Currency(Currency.EUR, amount: 1), Currency(Currency.RON));
+
+  _eurCurrencyValue=euroCurrency;
+  _usdCurrencyValue=usdCurrency;
+}
+
+
 String processingConversion() {
   print(_myController1.text + " " + _myController2.text);
-
   double ronEur = double.parse(_myController1.text.toString()) / _currencyValue;
-
   double eurRon = double.parse(_myController2.text.toString()) * _currencyValue;
-
   String finalResult = _prettyText1 +
       ronEur.toStringAsFixed(3) +
       "\n" +
       _prettyText2 +
       eurRon.toStringAsFixed(3);
-
   return "Converted sum in " + _currency + ":  \n\n" + finalResult;
 }
