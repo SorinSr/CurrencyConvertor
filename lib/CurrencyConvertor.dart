@@ -19,8 +19,8 @@ final TextEditingController _myController2 = new TextEditingController();
 
 String _currency = " EUR ";
 
-double _eurCurrencyValue ;
-double _usdCurrencyValue ;
+double _eurCurrencyValue = 4.8;
+double _usdCurrencyValue = 4.09;
 double _currencyValue =_eurCurrencyValue ; //default value
 
 String _prettyText1 = "RON to EUR :   ";
