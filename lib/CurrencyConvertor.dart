@@ -5,8 +5,6 @@ import 'package:forex/forex.dart';
 
 import 'package:flutter_currency_converter/flutter_currency_converter.dart';
 
-
-
 void main() {
   runApp(MyApp());
   getAmounts();
@@ -21,7 +19,7 @@ String _currency = " EUR ";
 
 double _eurCurrencyValue = 4.8;
 double _usdCurrencyValue = 4.09;
-double _currencyValue =_eurCurrencyValue ; //default value
+double _currencyValue = _eurCurrencyValue; //default value
 
 String _prettyText1 = "RON to EUR :   ";
 String _prettyText2 = "EUR to RON :   ";
@@ -51,13 +49,14 @@ class MyHomePage extends StatelessWidget {
               style: TextStyle(color: Colors.white))),
       body: Center(
         child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Image.network(
-                  "https://i.pinimg.com/originals/de/2f/80/de2f80a06e0405757bc15360c0da52bf.jpg",
-                  fit: BoxFit.cover),
-              CustomForm()
-            ]),
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Image.network(
+                "https://i.pinimg.com/originals/de/2f/80/de2f80a06e0405757bc15360c0da52bf.jpg",
+                fit: BoxFit.cover),
+            CustomForm()
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -100,56 +99,59 @@ class _CustomFormState extends State<CustomForm> {
             child: Text("Money convertor : " + _currency,
                 textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
         Padding(
-            padding: EdgeInsets.symmetric(horizontal: 4, vertical: 6),
-            child: TextField(
-              decoration: InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(4)),
-                    borderSide: BorderSide(width: 1,color: Colors.deepOrange),
+          padding: EdgeInsets.symmetric(horizontal: 4, vertical: 6),
+          child: TextField(
+            decoration: InputDecoration(
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(4)),
+                  borderSide: BorderSide(width: 1, color: Colors.deepOrange),
+                ),
+                disabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(4)),
+                  borderSide: BorderSide(width: 1, color: Colors.orange),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(4)),
+                  borderSide: BorderSide(width: 1, color: Colors.yellowAccent),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(4)),
+                  borderSide: BorderSide(
+                    width: 1,
                   ),
-                  disabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(4)),
-                    borderSide: BorderSide(width: 1,color: Colors.orange),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(4)),
-                    borderSide: BorderSide(width: 1,color: Colors.yellowAccent),
-                  ),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(4)),
-                      borderSide: BorderSide(width: 1,)
-                  ),
-
-                  labelText: "Amount of " + _prettyText1,
-                  labelStyle: TextStyle(
-                      color: myFocusNode.hasFocus
-                          ? Colors.amber
-                          : Colors.amberAccent)),
-              controller: _myController1,
-            )),
+                ),
+                labelText: "Amount of " + _prettyText1,
+                labelStyle: TextStyle(
+                    color: myFocusNode.hasFocus
+                        ? Colors.amber
+                        : Colors.amberAccent)),
+            controller: _myController1,
+          ),
+        ),
         Padding(
-            padding: EdgeInsets.symmetric(horizontal: 4, vertical: 6),
-            child: TextFormField(
-              decoration: InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(4)),
-                    borderSide: BorderSide(width: 1,color: Colors.deepOrange),
-                  ),
-                  disabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(4)),
-                    borderSide: BorderSide(width: 1,color: Colors.orange),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(4)),
-                    borderSide: BorderSide(width: 1,color: Colors.yellowAccent),
-                  ),
-                  labelText: "Amount of " + _prettyText2,
-                  labelStyle: TextStyle(
-                      color: myFocusNode.hasFocus
-                          ? Colors.amber
-                          : Colors.amberAccent)),
-              controller: _myController2,
-            )),
+          padding: EdgeInsets.symmetric(horizontal: 4, vertical: 6),
+          child: TextFormField(
+            decoration: InputDecoration(
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(4)),
+                  borderSide: BorderSide(width: 1, color: Colors.deepOrange),
+                ),
+                disabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(4)),
+                  borderSide: BorderSide(width: 1, color: Colors.orange),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(4)),
+                  borderSide: BorderSide(width: 1, color: Colors.yellowAccent),
+                ),
+                labelText: "Amount of " + _prettyText2,
+                labelStyle: TextStyle(
+                    color: myFocusNode.hasFocus
+                        ? Colors.amber
+                        : Colors.amberAccent)),
+            controller: _myController2,
+          ),
+        ),
         ElevatedButton.icon(
             onPressed: currencySwitch,
             icon: Icon(Icons.swap_horizontal_circle),
@@ -163,25 +165,27 @@ class _CustomFormState extends State<CustomForm> {
   }
 
   void currencySwitch() {
-    setState(() {
-      if (_counter >= 10) {
-        _counter = 2;
-      }
-      if (_counter.isEven) {
-        _currencyValue = _eurCurrencyValue;
-        _currency = " EUR ";
-        _prettyText1 = "RON to EUR :   ";
-        _prettyText2 = "EUR to RON :   ";
-      } else {
-        _currencyValue = _usdCurrencyValue;
-        _currency = " USD ";
-        _prettyText1 = "RON to USD :   ";
-        _prettyText2 = "USD to RON :   ";
-      }
-      _counter++;
-      print(_counter);
-      getAmounts();
-    });
+    setState(
+      () {
+        if (_counter >= 10) {
+          _counter = 2;
+        }
+        if (_counter.isEven) {
+          _currencyValue = _eurCurrencyValue;
+          _currency = " EUR ";
+          _prettyText1 = "RON to EUR :   ";
+          _prettyText2 = "EUR to RON :   ";
+        } else {
+          _currencyValue = _usdCurrencyValue;
+          _currency = " USD ";
+          _prettyText1 = "RON to USD :   ";
+          _prettyText2 = "USD to RON :   ";
+        }
+        _counter++;
+        print(_counter);
+        getAmounts();
+      },
+    );
   }
 }
 
@@ -192,10 +196,9 @@ void getAmounts() async {
   var euroCurrency = await FlutterCurrencyConverter.convert(
       Currency(Currency.EUR, amount: 1), Currency(Currency.RON));
 
-  _eurCurrencyValue=euroCurrency;
-  _usdCurrencyValue=usdCurrency;
+  _eurCurrencyValue = euroCurrency;
+  _usdCurrencyValue = usdCurrency;
 }
-
 
 String processingConversion() {
   print(_myController1.text + " " + _myController2.text);
