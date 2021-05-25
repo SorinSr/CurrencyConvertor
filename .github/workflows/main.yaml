@@ -1,8 +1,7 @@
 name: Check code quality
 on:
   push:
-    branches:
-      - main
+
 jobs:
   format-code:
     runs-on: ubuntu-latest
