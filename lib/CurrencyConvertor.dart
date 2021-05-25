@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_currency_converter/Currency.dart';
-import 'package:forex/forex.dart';
-
-import 'package:flutter_currency_converter/flutter_currency_converter.dart';
+import 'package:flutter_currency_converter/Currency.dart'; // ignore: import_of_legacy_library_into_null_safe
+import 'package:flutter_currency_converter/flutter_currency_converter.dart'; // ignore: import_of_legacy_library_into_null_safe
 
 void main() {
   runApp(MyApp());
@@ -44,15 +42,12 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          title: Text("Flutter Demo First Homework",
-              style: TextStyle(color: Colors.white))),
+      appBar: AppBar(title: Text("Flutter Demo First Homework", style: TextStyle(color: Colors.white))),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Image.network(
-                "https://i.pinimg.com/originals/de/2f/80/de2f80a06e0405757bc15360c0da52bf.jpg",
+            Image.network("https://i.pinimg.com/originals/de/2f/80/de2f80a06e0405757bc15360c0da52bf.jpg",
                 fit: BoxFit.cover),
             CustomForm()
           ],
@@ -61,10 +56,11 @@ class MyHomePage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(content: Text(processingConversion()));
-              });
+            context: context,
+            builder: (context) {
+              return AlertDialog(content: Text(processingConversion()));
+            },
+          );
         },
         tooltip: "Convert the money",
         child: Icon(Icons.swap_calls_rounded),
@@ -75,7 +71,7 @@ class MyHomePage extends StatelessWidget {
 }
 
 class CustomForm extends StatefulWidget {
-  const CustomForm({Key key}) : super(key: key);
+  const CustomForm({Key? key}) : super(key: key);
 
   @override
   _CustomFormState createState() => _CustomFormState();
@@ -96,8 +92,8 @@ class _CustomFormState extends State<CustomForm> {
       children: <Widget>[
         Padding(
             padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-            child: Text("Money convertor : " + _currency,
-                textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
+            child:
+                Text("Money convertor : " + _currency, textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 4, vertical: 6),
           child: TextField(
@@ -121,10 +117,7 @@ class _CustomFormState extends State<CustomForm> {
                   ),
                 ),
                 labelText: "Amount of " + _prettyText1,
-                labelStyle: TextStyle(
-                    color: myFocusNode.hasFocus
-                        ? Colors.amber
-                        : Colors.amberAccent)),
+                labelStyle: TextStyle(color: myFocusNode.hasFocus ? Colors.amber : Colors.amberAccent)),
             controller: _myController1,
           ),
         ),
@@ -145,10 +138,7 @@ class _CustomFormState extends State<CustomForm> {
                   borderSide: BorderSide(width: 1, color: Colors.yellowAccent),
                 ),
                 labelText: "Amount of " + _prettyText2,
-                labelStyle: TextStyle(
-                    color: myFocusNode.hasFocus
-                        ? Colors.amber
-                        : Colors.amberAccent)),
+                labelStyle: TextStyle(color: myFocusNode.hasFocus ? Colors.amber : Colors.amberAccent)),
             controller: _myController2,
           ),
         ),
@@ -190,11 +180,9 @@ class _CustomFormState extends State<CustomForm> {
 }
 
 void getAmounts() async {
-  var usdCurrency = await FlutterCurrencyConverter.convert(
-      Currency(Currency.USD, amount: 1), Currency(Currency.RON));
+  var usdCurrency = await FlutterCurrencyConverter.convert(Currency(Currency.USD, amount: 1), Currency(Currency.RON));
 
-  var euroCurrency = await FlutterCurrencyConverter.convert(
-      Currency(Currency.EUR, amount: 1), Currency(Currency.RON));
+  var euroCurrency = await FlutterCurrencyConverter.convert(Currency(Currency.EUR, amount: 1), Currency(Currency.RON));
 
   _eurCurrencyValue = euroCurrency;
   _usdCurrencyValue = usdCurrency;
@@ -204,10 +192,6 @@ String processingConversion() {
   print(_myController1.text + " " + _myController2.text);
   double ronEur = double.parse(_myController1.text.toString()) / _currencyValue;
   double eurRon = double.parse(_myController2.text.toString()) * _currencyValue;
-  String finalResult = _prettyText1 +
-      ronEur.toStringAsFixed(3) +
-      "\n" +
-      _prettyText2 +
-      eurRon.toStringAsFixed(3);
+  String finalResult = _prettyText1 + ronEur.toStringAsFixed(3) + "\n" + _prettyText2 + eurRon.toStringAsFixed(3);
   return "Converted sum in " + _currency + ":  \n\n" + finalResult;
 }
